@@ -26,12 +26,12 @@ Implementing the AI agent
 Measure the performance parameters
 
 ## PROGRAM
-import random
+    import random
 
-class Thing:
-    """
-        This represents any physical object that can appear in an Environment.
-    """
+    class Thing:
+        """
+            This represents any physical object that can appear in an Environment.
+        """
 
     def is_alive(self):
         """Things that are 'alive' should return true."""
@@ -42,12 +42,12 @@ class Thing:
         print("I don't know how to show_state.")
 
 
-class Agent(Thing):
-    """
-        An Agent is a subclass of Thing
-    """
+    class Agent(Thing):
+        """
+            An Agent is a subclass of Thing
+        """
 
-    def _init_(self, program=None):
+    def __init__(self, program=None):
         self.alive = True
         self.performance = 0
         self.program = program
@@ -57,15 +57,15 @@ class Agent(Thing):
         Override for appropriate subclasses of Agent and Thing."""
         return False
 
-def TableDrivenAgentProgram(table):
-    """
-    [Figure 2.7]
-    This agent selects an action based on the percept sequence.
-    It is practical only for tiny domains.
-    To customize it, provide as table a dictionary of all
-    {percept_sequence:action} pairs.
-    """
-    percepts = []
+    def TableDrivenAgentProgram(table):
+        """
+        [Figure 2.7]
+        This agent selects an action based on the percept sequence.
+        It is practical only for tiny domains.
+        To customize it, provide as table a dictionary of all
+        {percept_sequence:action} pairs.
+        """
+        percepts = []
 
     def program(percept):
         action =None
@@ -75,38 +75,38 @@ def TableDrivenAgentProgram(table):
 
     return program
 
-loc_A, loc_B = (0, 0), (1, 0)  # The two locations for the Vacuum world
+    loc_A, loc_B = (0, 0), (1, 0)  # The two locations for the Vacuum world
 
 
-def TableDrivenVacuumAgent():
-    """
-    Tabular approach towards vacuum world
-    """
-    table = {((loc_A, 'Clean'),): 'Right',
-             ((loc_A, 'Dirty'),): 'Suck',
-             ((loc_B, 'Clean'),): 'Left',
-             ((loc_B, 'Dirty'),): 'Suck',
-             ((loc_A, 'Dirty'), (loc_A, 'Clean')): 'Right',
-             ((loc_A, 'Clean'), (loc_B, 'Dirty')): 'Suck',
-             ((loc_B, 'Clean'), (loc_A, 'Dirty')): 'Suck',
-             ((loc_B, 'Dirty'), (loc_B, 'Clean')): 'Left',
-             ((loc_A, 'Dirty'), (loc_A, 'Clean'), (loc_B, 'Dirty')): 'Suck',
-             ((loc_B, 'Dirty'), (loc_B, 'Clean'), (loc_A, 'Dirty')): 'Suck'}
-    return Agent(TableDrivenAgentProgram(table))
+    def TableDrivenVacuumAgent():
+        """
+        Tabular approach towards vacuum world
+        """
+        table = {((loc_A, 'Clean'),): 'Right',
+                 ((loc_A, 'Dirty'),): 'Suck',
+                 ((loc_B, 'Clean'),): 'Left',
+                 ((loc_B, 'Dirty'),): 'Suck',
+                 ((loc_A, 'Dirty'), (loc_A, 'Clean')): 'Right',
+                 ((loc_A, 'Clean'), (loc_B, 'Dirty')): 'Suck',
+                 ((loc_B, 'Clean'), (loc_A, 'Dirty')): 'Suck',
+                 ((loc_B, 'Dirty'), (loc_B, 'Clean')): 'Left',
+                 ((loc_A, 'Dirty'), (loc_A, 'Clean'), (loc_B, 'Dirty')): 'Suck',
+                 ((loc_B, 'Dirty'), (loc_B, 'Clean'), (loc_A, 'Dirty')): 'Suck'}
+        return Agent(TableDrivenAgentProgram(table))
 
 
-class Environment:
-    """Abstract class representing an Environment. 'Real' Environment classes
-    inherit from this. Your Environment will typically need to implement:
-        percept:           Define the percept that an agent sees.
-        execute_action:    Define the effects of executing an action.
-                           Also update the agent.performance slot.
-    The environment keeps a list of .things and .agents (which is a subset
-    of .things). Each agent has a .performance slot, initialized to 0.
-    Each thing has a .location slot, even though some environments may not
-    need this."""
+    class Environment:
+        """Abstract class representing an Environment. 'Real' Environment classes
+        inherit from this. Your Environment will typically need to implement:
+            percept:           Define the percept that an agent sees.
+            execute_action:    Define the effects of executing an action.
+                               Also update the agent.performance slot.
+        The environment keeps a list of .things and .agents (which is a subset
+        of .things). Each agent has a .performance slot, initialized to 0.
+        Each thing has a .location slot, even though some environments may not
+        need this."""
 
-    def _init_(self):
+    def __init__(self):
         self.things = []
         self.agents = []
 
@@ -176,14 +176,14 @@ class Environment:
             self.agents.remove(thing)
 
 
-class TrivialVacuumEnvironment(Environment):
-    """This environment has two locations, A and B. Each can be Dirty
-    or Clean. The agent perceives its location and the location's
-    status. This serves as an example of how to implement a simple
-    Environment."""
+    class TrivialVacuumEnvironment(Environment):
+        """This environment has two locations, A and B. Each can be Dirty
+        or Clean. The agent perceives its location and the location's
+        status. This serves as an example of how to implement a simple
+        Environment."""
 
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.status = {loc_A: random.choice(['Clean', 'Dirty']),
                        loc_B: random.choice(['Clean', 'Dirty'])}
 
@@ -212,19 +212,21 @@ class TrivialVacuumEnvironment(Environment):
     def default_location(self, thing):
         """Agents start in either location at random."""
         return random.choice([loc_A, loc_B])
-        
-if _name_ == "_main_":
-    agent = TableDrivenVacuumAgent()
-    environment = TrivialVacuumEnvironment()
-    environment.add_thing(agent)
-    print(environment.status)
-    environment.run(steps=10)
-    print(environment.status)
-    print(agent.performance)
+
+        if __name__ == "__main__":
+            agent = TableDrivenVacuumAgent()
+            environment = TrivialVacuumEnvironment()
+            environment.add_thing(agent)
+            print(environment.status)
+            environment.run(steps=10)
+            print(environment.status)
+            print(agent.performance)
+
 
 ## OUTPUT
+![Screenshot (27)](https://user-images.githubusercontent.com/75235759/162140693-5ffb129e-0f6e-453c-87de-ae8ef8514e12.png)
 
-![162021502-9adc7ea7-3810-45b5-9e2c-ff3caafa714a](https://user-images.githubusercontent.com/75235759/162139749-23c8bd6b-8d92-42c8-b064-8ea898c43a80.jpeg)
+
 
 
 
