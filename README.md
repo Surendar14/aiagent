@@ -223,6 +223,13 @@ if _name_ == "_main_":
     print(agent.performance)
 
 ## OUTPUT
-162021502-9adc7ea7-3810-45b5-9e2c-ff3caafa714a.jpeg
+
+![162021502-9adc7ea7-3810-45b5-9e2c-ff3caafa714a](https://user-images.githubusercontent.com/75235759/162139749-23c8bd6b-8d92-42c8-b064-8ea898c43a80.jpeg)
+
+
+
+
+
+
 ## RESULT
 Thus, an AI agent is developed.
