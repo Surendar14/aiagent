@@ -223,7 +223,6 @@ if _name_ == "_main_":
     print(agent.performance)
 
 ## OUTPUT
-https://github.com/Surendar14/aiagent/blob/main/162021502-9adc7ea7-3810-45b5-9e2c-ff3caafa714a.jpeg
-
+162021502-9adc7ea7-3810-45b5-9e2c-.jpg
 ## RESULT
 Thus, an AI agent is developed.
